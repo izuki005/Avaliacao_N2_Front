@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Localizador de Filmes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .search-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        #movie-input {
+            padding: 8px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+        }
+
+        button {
+            padding: 8px 20px;
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .main {
+            padding: 20px;
+        }
+
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .image-container h3 {
+            text-align: center;
+            width: 100%;
+        }
+
+        .image-container img {
+            margin: 10px;
+            max-width: 300px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Localizador de Filmes</h1>
+        <div class="search-container">
+            <input type="text" id="movie-input" placeholder="Digite o título do filme ou programa de TV">
+            <button onclick="searchMovie()">Buscar</button>
+        </div>
+    </header>
+
+    <main id="result-container"></main>
+
+    <script>
+        // Função para buscar detalhes do filme e locais de filmagem
+        async function searchMovie() {
+            // Obtém o título do filme digitado pelo usuário
+            const movieTitle = document.getElementById("movie-input").value;
+
+            // Chave de API do OMDb
+            const omdbApiKey = "2d83b506";
+            
+            // Chave de API do Unsplash
+            const unsplashApiKey = "8PGPkNE_XE3YBAtrkV7HQf7aPEXXXKeGu5X1tNEedg8";
+
+            try {
+                // Busca detalhes do filme na API do OMDb
+                const omdbResponse = await fetch(`http://www.omdbapi.com/?s=${movieTitle}&apikey=${omdbApiKey}`);
+                const searchData = await omdbResponse.json();
+
+                // Verifica se a pesquisa retornou resultados
+                if (!searchData || searchData.Response === "False") {
+                    throw new Error("Filmes não encontrados");
+                }
+
+                // Limpa o resultado anterior
+                const resultContainer = document.getElementById("result-container");
+                resultContainer.innerHTML = "";
+
+                // Itera sobre os resultados da pesquisa
+                for (const movie of searchData.Search) {
+                    const imdbID = movie.imdbID;
+                    const movieResponse = await fetch(`http://www.omdbapi.com/?i=${imdbID}&apikey=${omdbApiKey}`);
+                    const movieData = await movieResponse.json();
+
+                    // Exibe os detalhes do filme
+                    const movieDiv = document.createElement("div");
+                    movieDiv.innerHTML = `
+                        <h2>${movieData.Title}</h2>
+                        <p><strong>Lançamento:</strong> ${movieData.Released}</p>
+                        <p><strong>Gênero:</strong> ${movieData.Genre}</p>
+                        <p><strong>Enredo:</strong> ${movieData.Plot}</p>
+                        <div class="image-container" id="image-container-${imdbID}"></div>
+                        <hr>
+                    `;
+                    resultContainer.appendChild(movieDiv);
+
+                    // Busca imagens dos locais de filmagem (supondo que a Unsplash tenha imagens desses locais)
+                    const countries = movieData.Country.split(',').map(country => country.trim());
+                    for (const country of countries) {
+                        try {
+                            const countryResponse = await fetch(`https://restcountries.com/v3.1/name/${country}`);
+                            const countryData = await countryResponse.json();
+                            const countryName = countryData[0].name.common;
+                            const unsplashResponse = await fetch(`https://api.unsplash.com/search/photos?query=${countryName}&client_id=${unsplashApiKey}`);
+                            const unsplashData = await unsplashResponse.json();
+                            const imageContainer = document.getElementById(`image-container-${imdbID}`);
+                            if (unsplashData.results.length > 0) {
+                                const imageDiv = document.createElement("div");
+                                imageDiv.classList.add("image-div");
+                                imageDiv.innerHTML = `
+                                    <h3>${countryName}</h3>
+                                    <img src="${unsplashData.results[0].urls.regular}" alt="${countryName}">
+                                `;
+                                imageContainer.appendChild(imageDiv);
+                            } else {
+                                console.log(`Imagem para ${countryName} não encontrada`);
+                            }
+                        } catch (error) {
+                            console.error(`Erro ao buscar imagens para ${country}:`, error);
+                        }
+                    }
+                }
+            } catch (error) {
+                // Exibe mensagens de erro no console em caso de falha na busca
+                console.error("Erro:", error);
+            }
+        }
+    </script>
+</body>
+</html>
+
+
