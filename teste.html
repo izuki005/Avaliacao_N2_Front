@@ -9,13 +9,33 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            height: 10000px;
+            background-color: #c49191;
         }
 
         header {
             background-color: #333;
+            height: 190PX;
             color: #fff;
             padding: 20px;
             text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 500px;
+            height: 200px;
+            border: 0.1px solid white;
+            border-radius: 20px;
+            background-color: #696868;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: fixed;
+
         }
 
         h1 {
@@ -32,13 +52,27 @@
             padding: 8px;
             width: 300px;
             border: 1px solid #ccc;
+            color: white;
             border-radius: 5px 0 0 5px;
+            background-color: rgb(255, 255, 255);
+            outline: none;
+            box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.267);
         }
 
         button {
             padding: 8px 20px;
             background-color: #007bff;
             border: none;
+            box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.267);
+            color: #fff;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+        button:hover {
+            padding: 8px 20px;
+            background-color: #007bff86;
+            border: #ccc 1px solid;
+            box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.267);
             color: #fff;
             border-radius: 0 5px 5px 0;
             cursor: pointer;
@@ -74,10 +108,12 @@
 </head>
 <body>
     <header>
-        <h1>Localizador de Filmes</h1>
-        <div class="search-container">
-            <input type="text" id="movie-input" placeholder="Digite o título do filme ou programa de TV">
-            <button onclick="searchMovie()">Buscar</button>
+        <div class="container">
+            <h1>Localizador de Filmes</h1>
+            <div class="search-container">
+                <input type="text" id="movie-input" placeholder="Digite o título do filme ou programa de TV">
+                <button onclick="searchMovie()">Buscar</button>
+            </div>
         </div>
     </header>
 
@@ -93,7 +129,7 @@
             const omdbApiKey = "2d83b506";
             
             // Chave de API do Unsplash
-            const unsplashApiKey = "8PGPkNE_XE3YBAtrkV7HQf7aPEXXXKeGu5X1tNEedg8";
+            // const unsplashApiKey = "8PGPkNE_XE3YBAtrkV7HQf7aPEXXXKeGu5X1tNEedg8";
 
             try {
                 // Busca detalhes do filme na API do OMDb
@@ -135,7 +171,8 @@
                             const countryResponse = await fetch(`https://restcountries.com/v3.1/name/${country}`);
                             const countryData = await countryResponse.json();
                             const countryName = countryData[0].name.common;
-                            const unsplashResponse = await fetch(`https://api.unsplash.com/search/photos?query=${countryName}&client_id=${unsplashApiKey}`);
+                            // const unsplashResponse = await fetch(`https://api.unsplash.com/search/photos?query=${countryName}&client_id=${unsplashApiKey}`);
+                            const unsplashResponse = await fetch(`https://api.unsplash.com/search/photos?query=${countryName}`);
                             const unsplashData = await unsplashResponse.json();
                             const imageContainer = document.getElementById(`image-container-${imdbID}`);
                             if (unsplashData.results.length > 0) {

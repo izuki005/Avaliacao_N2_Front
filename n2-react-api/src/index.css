@@ -1,0 +1,113 @@
+/* body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+} */
+
+/* code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+} */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #c49191;
+}
+
+header {
+  background-color: #333;
+  height: 190PX;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  max-width: 600px;
+  width: 500px;
+  height: 200px;
+  border: 0.1px solid white;
+  border-radius: 20px;
+  background-color: #696868;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: fixed;
+
+}
+
+h1 {
+  margin: 0;
+}
+
+.search-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+#movie-input {
+  padding: 8px;
+  width: 300px;
+  border: 1px solid #ccc;
+  color: rgb(0, 0, 0);
+  border-radius: 5px 0 0 5px;
+  background-color: rgb(255, 255, 255);
+  outline: none;
+  box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.267);
+}
+
+button {
+  padding: 8px 20px;
+  background-color: #007bff;
+  border: none;
+  box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.267);
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+button:hover {
+  padding: 8px 20px;
+  background-color: #007bff86;
+  border: #ccc 1px solid;
+  box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.267);
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.main {
+  padding: 20px;
+}
+
+.image-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.image-container h3 {
+  text-align: center;
+  width: 100%;
+}
+
+.image-container img {
+  margin: 10px;
+  max-width: 300px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
