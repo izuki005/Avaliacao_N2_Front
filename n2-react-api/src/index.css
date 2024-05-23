@@ -17,11 +17,11 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  background-color: #c49191;
+  background-color: #1C1C28;
 }
 
 header {
-  background-color: #333;
+  background-color: #1C1C28;
   height: 190PX;
   color: #fff;
   padding: 20px;
@@ -34,25 +34,42 @@ header {
   max-width: 600px;
   width: 500px;
   height: 200px;
-  border: 0.1px solid white;
+
   border-radius: 20px;
-  background-color: #696868;
+  background-color: transparent;
   margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: fixed;
-
+  top:
 }
 
 h1 {
   margin: 0;
+  color: #E61D00;
 }
 
 .search-container {
   margin-top: 20px;
   display: flex;
   justify-content: center;
+}
+
+.movie-details {
+  display: flex;
+  color:white;
+  flex-direction: column;
+  flex: 1; /* Ocupa o espaço disponível */
+}
+
+.movie-details p {
+  margin-top: 5px; /* Ajuste conforme necessário */
+  font-size:20px;
+}
+
+.movie-details h2{
+  color: #E61D00;
+  font-size:35px;
 }
 
 #movie-input {
@@ -66,11 +83,26 @@ h1 {
   box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.267);
 }
 
+.movie-container {
+  display:flex;
+  grid-template-columns: 1fr 300px; /* Altere este valor conforme necessário */
+  grid-column-gap: 20px; /* Ajuste conforme necessário */
+  margin-bottom: 20px;
+  margin-top:40px;
+  margin-left: 20px;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 20px; /* Adicione um espaçamento opcional entre os filmes */
+}
+
+.movie-container img {
+  border-radius: 15px; /* Valor do raio para arredondar a imagem */
+  margin-bottom:20px;
+}
+
 button {
   padding: 8px 20px;
-  background-color: #007bff;
-  border: none;
-  box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.267);
+  background-color: #4f4f4f;
+  box-shadow: 1px 1px 10px 2px rgb(114, 114, 114);
   color: #fff;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
