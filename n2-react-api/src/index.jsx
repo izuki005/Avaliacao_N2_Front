@@ -82,19 +82,22 @@ function MeuComponente() {
             </header>
             <div id="result-container">
                 {searchResults.map((result, index) => (
-                    <div key={index}>
-                        <h2>{result.movieData.Title}</h2>
-                        <p><strong>Lançamento:</strong> {result.movieData.Released}</p>
-                        <p><strong>Gênero:</strong> {result.movieData.Genre}</p>
-                        <p><strong>Enredo:</strong> {result.movieData.Plot}</p>
+                    <div key={index} className="movie-container">
                         <img src={result.movieData.Poster} alt={result.movieData.Title + " Poster"} />
-                        {/* Removido o contêiner de imagem e o mapeamento das imagens */}
-                        <hr />
+                        <div className="movie-details">
+                            <h2>{result.movieData.Title}</h2>
+                            <p><strong style={{ color: '#E61D00' }} >Lançamento:</strong> {result.movieData.Released}</p>
+                            <p><strong style={{ color: '#E61D00' }} >Gênero:</strong> {result.movieData.Genre}</p>
+                            <p><strong style={{ color: '#E61D00' }} >Enredo:</strong> {result.movieData.Plot}</p>
+                        </div>
                     </div>
                 ))}
             </div>
         </div>
     );
+    
+    
+    
 }
 
 export default MeuComponente;
