@@ -56,6 +56,7 @@ function MeuComponente() {
                             <p><strong style={{ color: '#E61D00' }}>Lançamento:</strong> {result.Released}</p>
                             <p><strong style={{ color: '#E61D00' }}>Gênero:</strong> {result.Genre}</p>
                             <p><strong style={{ color: '#E61D00' }}>Enredo:</strong> {result.Plot}</p>
+                            <p><strong style={{ color: '#E61D00' }}>Tipo:</strong> {result.Type}</p>
                             <p><strong style={{ color: '#E61D00' }}>Duração:</strong> {result.Runtime}</p>
                         </div>
                     </div>
