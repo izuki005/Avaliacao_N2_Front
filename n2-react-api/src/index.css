@@ -45,6 +45,10 @@ header {
 
 }
 
+.pagination {
+  margin: auto;
+}
+
 h1 {
   margin: 0;
 }
